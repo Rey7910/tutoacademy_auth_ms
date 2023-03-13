@@ -1,0 +1,28 @@
+version: "3"
+
+services: 
+  tutoacademy_auth_ms:
+    container_name: tutoacademy_auth_ms
+    restart: always
+    build: .
+    ports: 
+      - "3002:3002"
+    links:
+      - tutoacademy_auth_db
+    volumes: 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    logging: 
+          options: 
+               max-size: "10m" 
+               max-file: "3"
+    
+  tutoacademy_auth_db:
+    container_name: tutoacademy_auth_db
+    image: mongo
+    ports: 
+      - "3001:3001"
+    logging: 
+          options: 
+               max-size: "10m" 
+               max-file: "3"
